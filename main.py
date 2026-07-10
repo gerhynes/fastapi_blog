@@ -171,6 +171,22 @@ async def general_exception_handler(
     )
 
 
+@app.get("/forgot-password", include_in_schema=False)
+async def forgot_password_page(request: Request):
+    return templates.TemplateResponse(
+        request, "forgot_password.html", {"title": "Forgot Password"}
+    )
+
+
+@app.get("reset-password", include_in_schema=False)
+async def reset_password_page(request: Request):
+    response = templates.TemplateResponse(
+        request, "reset_password.html", {"title": "Reset Password"}
+    )
+    response.headers["Referrer-Policy"] = "no-referrer"
+    return response
+
+
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(
     request: Request, exception: RequestValidationError
@@ -190,4 +206,4 @@ async def validation_exception_handler(
     )
 
 
-# video_time 7:40:06
+# video_time 8:38:04
